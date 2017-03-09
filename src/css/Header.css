@@ -1,0 +1,15 @@
+.nav {
+  width: 100px;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+}
+
+.change-button {
+  height: 70px;
+  line-height: 70px;
+}
+
+.change-button-con {
+  text-align: center;
+}
