@@ -5,7 +5,6 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import App from './App'
 import { Home, Search, Details, PersonMessage } from './containers'
 
-import 'antd/dist/antd.css'
 import './index.css'
 
 ReactDOM.render(
