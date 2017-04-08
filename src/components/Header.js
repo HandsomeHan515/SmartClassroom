@@ -10,7 +10,7 @@ const content = (
   <div className='change-button-con'>
     <p><Link>登录</Link></p>
     <p><Link>注册</Link></p>
-    <p> <Link>修改密码</Link></p>
+    <p><Link>修改密码</Link></p>
   </div>
 )
 
