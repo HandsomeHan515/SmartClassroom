@@ -1,3 +1,4 @@
 import { navMenu } from './Definition'
+import { message } from './MessageMockDate'
 
-export { navMenu } 
+export { navMenu, message } 
