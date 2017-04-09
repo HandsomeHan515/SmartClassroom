@@ -62,7 +62,6 @@ class Message extends Component {
         <div className='save'>
           <Button
             type='primary'
-
             onClick={this.handleClickSaveMessage}
           >
             保存
