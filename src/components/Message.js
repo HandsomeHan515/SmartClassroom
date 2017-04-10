@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Button, Popconfirm } from 'antd'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import { transformTime } from '../method/time'
-
-import { message } from '../data'
+import { addMessage, deleteMessage } from '../actions'
 
 import '../css/Message.css'
 
@@ -12,7 +13,6 @@ class Message extends Component {
     super(props)
 
     this.state = {
-      message: message,
       value: '',
     }
 
@@ -27,28 +27,25 @@ class Message extends Component {
   }
 
   handleClickSaveMessage = () => {
-    let tmpMessage = this.state.message.slice()
-    let id = this.state.message.length + 1
+    let id = this.props.message.length + 1 //after get id from service
     let content = this.value
     let time = Math.floor(new Date().getTime() / 1000)
+
     if (!content) return false
-    tmpMessage.unshift({ id, content, time })
+    this.props.addMessage({ id, content, time })
     this.value = ''
     this.setState({
-      message: tmpMessage,
       value: ''
     })
   }
 
-  handleClickDeleteMessage = i => {
-    let tmpMessage = this.state.message.slice()
-    tmpMessage.splice(i, 1)
-    this.setState({
-      message: tmpMessage
-    })
+  handleClickDeleteMessage = messageID => {
+    this.props.deleteMessage(messageID)
   }
 
   render() {
+    const { message } = this.props
+
     return (
       <div style={{ margin: '20px 30px' }}>
         <textarea
@@ -68,9 +65,9 @@ class Message extends Component {
           </Button>
         </div>
         {
-          this.state.message.map((item, index) => {
+          message.map((item, index) => {
             let time = transformTime(item.time)
-
+            let messageID = item.id
             return (
               <div key={index} className='message-con' >
                 <div>
@@ -78,7 +75,7 @@ class Message extends Component {
                   <Popconfirm
                     placement='bottom'
                     title='确认删除该信息吗？'
-                    onConfirm={() => this.handleClickDeleteMessage(index)}
+                    onConfirm={() => this.handleClickDeleteMessage(messageID)}
                   >
                     <Button type='danger'>
                       删除
@@ -96,4 +93,20 @@ class Message extends Component {
   }
 }
 
-export default Message
+const mapStateToProps = state => {
+  return ({
+    message: state.message
+  })
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    addMessage,
+    deleteMessage
+  }, dispatch)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Message)
