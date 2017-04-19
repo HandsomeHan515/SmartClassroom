@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Button, Popconfirm } from 'antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Button, Popconfirm } from 'antd'
 
 import { transformTime } from '../method/time'
 import { addMessage, deleteMessage } from '../actions'
@@ -9,31 +9,29 @@ import { addMessage, deleteMessage } from '../actions'
 import '../css/Message.css'
 
 class Message extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
 
     this.state = {
-      value: '',
+      value: ''
     }
-
-    this.value = ''
   }
 
   handleChangeValue = e => {
-    this.value = e.target.value
     this.setState({
-      value: this.value
+      value: e.target.value
     })
   }
 
   handleClickSaveMessage = () => {
     let id = this.props.message.length + 1 //after get id from service
-    let content = this.value
+    let content = this.state.value
     let time = Math.floor(new Date().getTime() / 1000)
 
-    if (!content) return false
-    this.props.addMessage({ id, content, time })
-    this.value = ''
+    if (content) {
+      this.props.addMessage({ id, content, time })
+    }
+
     this.setState({
       value: ''
     })
@@ -83,7 +81,9 @@ class Message extends Component {
                   </Popconfirm>
                 </div>
 
-                <p className='content'>{item.content}</p>
+                <p className='content'>
+                  {item.content}
+                </p>
               </div>
             )
           })
