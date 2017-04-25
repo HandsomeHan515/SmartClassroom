@@ -10,10 +10,10 @@ class App extends Component {
       <div>
         <Header />
 
-        <div style={{ height: 5000, width: 980, margin: '0 auto' }}>
+        <div style={{ width: 980, margin: '0 auto' }}>
           {this.props.children}
         </div>
-        
+
         <Footer />
 
         <BackTop />

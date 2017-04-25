@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 
+import { SearchCon } from '../components'
+
 class Search extends Component {
   render() {
     return (
       <div style={{ textAlign: 'center' }}>
-        搜索界面
+        <SearchCon />
       </div>
     )
   }

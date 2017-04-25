@@ -1,4 +1,4 @@
 import { navMenu } from './Definition'
-import { message } from './MessageMockDate'
+import { message, checkinMsg, } from './MessageMockDate'
 
-export { navMenu, message } 
+export { navMenu, message, checkinMsg, } 
