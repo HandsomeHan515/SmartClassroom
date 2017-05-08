@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Table, Input, Button, Icon } from 'antd'
 
 import { transformTime, timeDuration } from '../method/time'
 
 import { checkinMsg } from '../data'
+import * as apis from '../service/apis'
 
 import '../css/CheckinStatistics.css'
 
@@ -18,6 +21,12 @@ class CheckinStatistics extends Component {
       filtered: false,
     }
   }
+
+
+  componentWillMount() {
+    apis.getDetails()
+  }
+
 
   onInputChange = e => {
     this.setState({
@@ -62,6 +71,7 @@ class CheckinStatistics extends Component {
   }
 
   render() {
+    const { detail } = this.props
     const columns = [
       {
         title: 'Name', dataIndex: 'name', id: 'name', filterDropdown: (
@@ -95,7 +105,7 @@ class CheckinStatistics extends Component {
           rowKey='id'
           bordered
           scroll={{ x: true, y: 530 }}
-          dataSource={this.state.data}
+          dataSource={detail}
           columns={columns}
           pagination={{
             defaultPageSize: 15,
@@ -104,7 +114,7 @@ class CheckinStatistics extends Component {
             showSizeChanger: true,
             onShowSizeChange: this.onShowSizeChange,
             defaultCurrent: 1,
-            total: this.state.data.length,
+            total: detail.length,
             showTotal: this.showTotal
           }}
         />
@@ -113,4 +123,19 @@ class CheckinStatistics extends Component {
   }
 }
 
-export default CheckinStatistics
+const mapStateToProps = state => {
+  return ({
+    detail: state.result.detail
+  })
+}
+
+// const mapDispatchToProps = dispatch => {
+//   return bindActionCreators({
+
+//   }, dispatch)
+// }
+
+export default connect(
+  mapStateToProps,
+  // mapDispatchToProps
+)(CheckinStatistics)

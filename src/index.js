@@ -8,10 +8,10 @@ import App from './App'
 import { Home, Search, Details, PersonMessage, Contacts } from './containers'
 
 import { reducer } from './reducers'
-import { initialState } from './store'
+import { state } from './store'
 import './index.css'
 
-const store = createStore(reducer, initialState)
+const store = createStore(reducer, state)
 
 ReactDOM.render(
   <Provider store={store}>

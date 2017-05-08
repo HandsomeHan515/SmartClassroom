@@ -17,6 +17,10 @@ class Message extends Component {
     }
   }
 
+  componentWillMount() {
+
+  }
+
   handleChangeValue = e => {
     this.setState({
       value: e.target.value
@@ -26,7 +30,9 @@ class Message extends Component {
   handleClickSaveMessage = () => {
     let id = this.props.message.length + 1 //after get id from service
     let content = this.state.value
-    let time = Math.floor(new Date().getTime() / 1000)
+    let time = Date.parse(new Date()) / 1000
+
+    console.log(time)
 
     if (content) {
       this.props.addMessage({ id, content, time })
@@ -95,7 +101,7 @@ class Message extends Component {
 
 const mapStateToProps = state => {
   return ({
-    message: state.message
+    message: state.result.message
   })
 }
 
