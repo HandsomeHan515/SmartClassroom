@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Button, Popconfirm } from 'antd'
+import { Button, Popconfirm, Spin } from 'antd'
 
 import { transformTime } from '../method/time'
-import { addMessage, deleteMessage } from '../actions'
+import { getMessage, addMessage, deleteMessage } from '../actions'
 
 import '../css/Message.css'
 
 class Message extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       value: ''
@@ -18,7 +18,7 @@ class Message extends Component {
   }
 
   componentWillMount() {
-
+    this.props.getMessage()
   }
 
   handleChangeValue = e => {
@@ -28,14 +28,16 @@ class Message extends Component {
   }
 
   handleClickSaveMessage = () => {
-    let id = this.props.message.length + 1 //after get id from service
     let content = this.state.value
     let time = Date.parse(new Date()) / 1000
 
-    console.log(time)
+    let payload = {
+      content,
+      time,
+    }
 
     if (content) {
-      this.props.addMessage({ id, content, time })
+      this.props.addMessage({ payload })
     }
 
     this.setState({
@@ -43,70 +45,83 @@ class Message extends Component {
     })
   }
 
-  handleClickDeleteMessage = messageID => {
-    this.props.deleteMessage(messageID)
+  handleClickDeleteMessage = payload => {
+    this.props.deleteMessage({ payload })
   }
 
   render() {
-    const { message } = this.props
+    const { message, isFetching } = this.props
 
     return (
-      <div style={{ margin: '20px 30px' }}>
-        <textarea
-          className='textarea'
-          placeholder='请输入您要发布的内容...'
-          value={this.state.value}
-          onChange={(e) => this.handleChangeValue(e)}
-        >
-        </textarea>
-
-        <div className='save'>
-          <Button
-            type='primary'
-            onClick={this.handleClickSaveMessage}
-          >
-            保存
-          </Button>
-        </div>
+      <div>
         {
-          message.map((item, index) => {
-            let time = transformTime(item.time)
-            let messageID = item.id
-            return (
-              <div key={index} className='message-con' >
-                <div>
-                  <span style={{ display: 'inline-block', marginRight: 146 }}>{time}</span>
-                  <Popconfirm
-                    placement='bottom'
-                    title='确认删除该信息吗？'
-                    onConfirm={() => this.handleClickDeleteMessage(messageID)}
-                  >
-                    <Button type='danger'>
-                      删除
-                    </Button>
-                  </Popconfirm>
-                </div>
-
-                <p className='content'>
-                  {item.content}
-                </p>
+          isFetching ?
+            <div>
+              <Spin style={{ textAlign: 'center', width: 980 }}>
+                数据加载中
+              </Spin>
+            </div>
+            :
+            <div style={{ margin: '20px 30px' }}>
+              <textarea
+                className='textarea'
+                placeholder='请输入您要发布的内容...'
+                value={this.state.value}
+                onChange={(e) => this.handleChangeValue(e)}
+              >
+              </textarea>
+              <div className='save'>
+                <Button
+                  type='primary'
+                  onClick={this.handleClickSaveMessage}
+                >
+                  保存
+                </Button>
               </div>
-            )
-          })
+              {
+                message.map((item, index) => {
+                  let time = transformTime(item.time)
+
+                  return (
+                    <div key={index} className='message-con' >
+                      <div>
+                        <span style={{ display: 'inline-block', marginRight: 146 }}>{time}</span>
+                        <Popconfirm
+                          placement='bottom'
+                          title='确认删除该信息吗？'
+                          onConfirm={() => this.handleClickDeleteMessage(item)}
+                        >
+                          <Button type='danger'>
+                            删除
+                    </Button>
+                        </Popconfirm>
+                      </div>
+                      <p className='content'>
+                        {item.content}
+                      </p>
+                    </div>
+                  )
+                })
+              }
+            </div>
         }
       </div>
+
+
     )
   }
 }
 
 const mapStateToProps = state => {
   return ({
-    message: state.result.message
+    message: state.result.message,
+    isFetching: state.status.message.isFetching,
   })
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
+    getMessage,
     addMessage,
     deleteMessage
   }, dispatch)

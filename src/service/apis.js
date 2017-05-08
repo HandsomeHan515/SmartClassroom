@@ -1,5 +1,4 @@
 import { camelizeKeys } from 'humps'
-import { normalize } from 'normalizr'
 
 import { request } from './utils'
 import { address } from './address'
@@ -9,16 +8,12 @@ export const get = (config, schema) => {
     request(config)
       .then(rsp => {
         console.log('Response: %o', rsp)
-        // // let camelizedData = camelizeKeys(rsp)
-        // let schemaData = normalize(rsp, schema)
-        // console.log('schema data: %o', schemaData)
-
         return rsp
       })
   )
 }
 
-const base = (config) => {
+const base = config => {
   return (
     request(config)
       .then(rsp => {
@@ -37,27 +32,30 @@ export const getDetails = () => (
   get({ url: address.details })
 )
 
-// export const delMaterials = id => {
-//   return del({
-//     url: `${address.materials}${id}/`,
-//     method: 'DELETE',
-//     isJson: false
-//   })
-// }
+export const getMessage = () => (
+  get({ url: address.message })
+)
 
-// export const createMaterial = material => (
-//   create({
-//     url: address.materials,
-//     method: 'POST',
-//     body: JSON.stringify(material)
-//   })
-// )
+export const createMessage = message => (
+  create({
+    url: `${address.message}`,
+    method: 'POST',
+    body: JSON.stringify(message),
+  })
+)
 
-// export const updateMaterial = material => (
-//   update({
-//     url: `${address.materials}${material.id}/`,
-//     method: 'PATCH',
-//     body: JSON.stringify(material)
-//   })
-// )
+export const delMessage = messageID => (
+  del({
+    url: `${address.message}${messageID}`,
+    method: 'DELETE',
+    isJson: false,
+  })
+)
 
+export const updateMessage = messageID => (
+  update({
+    url: `${address.message}${messageID}`,
+    method: 'PATCH',
+    isJson: false,
+  })
+)

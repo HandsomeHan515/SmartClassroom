@@ -1,17 +1,28 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import { createStore } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import createSagaMiddleware from 'redux-saga'
 
 import App from './App'
 import { Home, Search, Details, PersonMessage, Contacts } from './containers'
 
 import { reducer } from './reducers'
+import rootSaga from './sagas'
 import { state } from './store'
 import './index.css'
 
-const store = createStore(reducer, state)
+let sagaMiddleware = createSagaMiddleware()
+
+let enhancer = compose(
+  applyMiddleware(sagaMiddleware),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+
+const store = createStore(reducer, state, enhancer)
+
+sagaMiddleware.run(rootSaga)
 
 ReactDOM.render(
   <Provider store={store}>

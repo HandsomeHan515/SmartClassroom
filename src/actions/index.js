@@ -15,22 +15,24 @@ const action = (type, payload = {}) => {
   return { type, ...payload }
 }
 
-//type of message
+//Message
+//aciton of message
+export const MESSAGE = 'MESSAGE'
+
+export const GET_MESSAGE = 'GET_MESSAGE'
+
 export const ADD_MESSAGE = 'ADD_MESSAGE'
-export const DELETE_MESSAGE = 'DELETE_MESSAGE'
+export const ADD_RESULT_MESSAGE = 'ADD_RESULT_MESSAGE'
 
-//action of message
-export const addMessage = message => ({
-  type: ADD_MESSAGE,
-  message
-})
+export const DEL_MESSAGE = 'DEL_MESSAGE'
+export const DEL_RESULT_MESSAGE = 'DEL_RESULT_MESSAGE'
 
-export const deleteMessage = messageID => ({
-  type: DELETE_MESSAGE,
-  messageID
-})
+//type of status
+export const messageStatus = createRequestTypes('MESSAGE')
 
-//Detail
-export const DETAIL = 'DETAIL'
-export const GET_DETAIL = 'GET_DETAIL'
+// action of message
+export const getMessage = () => action(MESSAGE)
 
+export const addMessage = payload => action(ADD_MESSAGE, payload)
+
+export const deleteMessage = payload => action(DEL_MESSAGE, payload)

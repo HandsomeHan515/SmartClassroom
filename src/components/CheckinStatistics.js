@@ -22,7 +22,6 @@ class CheckinStatistics extends Component {
     }
   }
 
-
   componentWillMount() {
     apis.getDetails()
   }
