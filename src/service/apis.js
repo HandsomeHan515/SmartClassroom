@@ -1,5 +1,3 @@
-import { camelizeKeys } from 'humps'
-
 import { request } from './utils'
 import { address } from './address'
 
@@ -28,10 +26,7 @@ export const create = config => base(config)
 
 export const update = config => base(config)
 
-export const getDetails = () => (
-  get({ url: address.details })
-)
-
+//Message
 export const getMessage = () => (
   get({ url: address.message })
 )
@@ -55,6 +50,27 @@ export const delMessage = messageID => (
 export const updateMessage = messageID => (
   update({
     url: `${address.message}${messageID}`,
+    method: 'PATCH',
+    isJson: false,
+  })
+)
+
+//Detail
+export const getDetail = () => (
+  get({ url: address.detail })
+)
+
+export const createDetail = detail => (
+  create({
+    url: `${address.detail}`,
+    method: 'POST',
+    body: JSON.stringify(detail),
+  })
+)
+
+export const updateDetail = detailID => (
+  update({
+    url: `${address.detail}${detailID}`,
     method: 'PATCH',
     isJson: false,
   })

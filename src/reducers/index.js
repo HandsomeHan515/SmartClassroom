@@ -30,6 +30,7 @@ const changeStatus = types => {
 
 export const status = combineReducers({
   message: changeStatus([actions.messageStatus.REQUEST, actions.messageStatus.SUCCESS, actions.messageStatus.FAILURE]),
+  detail: changeStatus([actions.detailStatus.REQUEST, actions.detailStatus.SUCCESS, actions.detailStatus.FAILURE]),
 })
 
 const message = (state = [], action) => {
@@ -57,7 +58,21 @@ const message = (state = [], action) => {
 }
 
 const detail = (state = [], action) => {
-  return state
+  switch (action.type) {
+    case actions.GET_DETAIL:
+      return [
+        ...action.message, ...state,
+      ]
+
+    case actions.ADD_RESULT_DETAIL:
+      return [
+        action.message,
+        ...state,
+      ]
+
+    default:
+      return state
+  }
 }
 
 export const result = combineReducers({

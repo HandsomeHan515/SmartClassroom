@@ -38,10 +38,48 @@ export function* watchDelMessage() {
   }
 }
 
+export function* watchGetDetail() {
+  while (true) {
+    yield take(actions.DETAIL)
+    yield put({ type: actions.detailStatus.REQUEST })
+
+    try {
+      const detail = yield call(apis.getDetail)
+
+      yield put({ type: actions.GET_DETAIL, message: detail.reverse() })
+
+      yield put({ type: actions.detailStatus.SUCCESS })
+    } catch (err) {
+      yield put({ type: actions.detailStatus.FAILURE })
+    }
+  }
+}
+
+export function* watchAddDetail() {
+  while (true) {
+    const { payload } = yield take(actions.ADD_DETAIL)
+
+    const detail = yield call(apis.createDetail, payload)
+    yield put({ type: actions.ADD_RESULT_MESSAGE, detail })
+  }
+}
+
+// export function* watchUpdateDetail() {
+//   while (true) {
+//     const { payload } = yield take(actions.DEL_MESSAGE)
+//     const { id } = payload
+
+//     yield call(apis.delMessage, id)
+//     yield put({ type: actions.DEL_RESULT_MESSAGE, id })
+//   }
+// }
+
 export default function* rootSage() {
   yield [
     fork(watchGetMessage),
     fork(watchAddMessage),
     fork(watchDelMessage),
+    fork(watchGetDetail),
+    fork(watchAddDetail),
   ]
 }

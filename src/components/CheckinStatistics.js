@@ -5,8 +5,7 @@ import { Table, Input, Button, Icon } from 'antd'
 
 import { transformTime, timeDuration } from '../method/time'
 
-import { checkinMsg } from '../data'
-import * as apis from '../service/apis'
+import { getDetail } from '../actions'
 
 import '../css/CheckinStatistics.css'
 
@@ -15,7 +14,6 @@ class CheckinStatistics extends Component {
     super(props)
 
     this.state = {
-      data: checkinMsg,
       searchText: '',
       filterDropdownVisible: false,
       filtered: false,
@@ -23,9 +21,8 @@ class CheckinStatistics extends Component {
   }
 
   componentWillMount() {
-    apis.getDetails()
+    this.props.getDetail()
   }
-
 
   onInputChange = e => {
     this.setState({
@@ -34,13 +31,14 @@ class CheckinStatistics extends Component {
   }
 
   onSearch = () => {
+    const { detail } = this.props
     const { searchText } = this.state
     const reg = new RegExp(searchText, 'gi')
 
     this.setState({
       filterDropdownVisible: false,
       filtered: !!searchText,
-      data: checkinMsg.map(record => {
+      data: detail.map(record => {
         const match = record.name.match(reg)
 
         if (!match) return false
@@ -128,13 +126,13 @@ const mapStateToProps = state => {
   })
 }
 
-// const mapDispatchToProps = dispatch => {
-//   return bindActionCreators({
-
-//   }, dispatch)
-// }
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    getDetail
+  }, dispatch)
+}
 
 export default connect(
   mapStateToProps,
-  // mapDispatchToProps
+  mapDispatchToProps
 )(CheckinStatistics)
