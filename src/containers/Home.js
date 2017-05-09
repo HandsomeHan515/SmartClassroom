@@ -11,6 +11,7 @@ class Home extends Component {
       <div>
         <div style={{ margin: '5px 0 0 10px' }}>
           <Carousel effect='fade' autoplay={true}>
+            <div><img className='img' src={images.banner1} alt="banner1" /></div>
             <div><img className='img' src={images.banner2} alt="banner2" /></div>
             <div><img className='img' src={images.banner3} alt="banner3" /></div>
           </Carousel>
