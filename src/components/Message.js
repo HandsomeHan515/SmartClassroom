@@ -53,61 +53,55 @@ class Message extends Component {
     const { message, isFetching } = this.props
 
     return (
-      <div>
+      <div style={{ margin: '20px 30px' }}>
+        <textarea
+          className='textarea'
+          placeholder='请输入您要发布的内容...'
+          value={this.state.value}
+          onChange={(e) => this.handleChangeValue(e)}
+        >
+        </textarea>
+        <div className='save'>
+          <Button
+            type='primary'
+            onClick={this.handleClickSaveMessage}
+          >
+            发布
+          </Button>
+        </div>
         {
           isFetching ?
-            <div>
-              <Spin style={{ textAlign: 'center', width: 980 }}>
-                数据加载中
-              </Spin>
-            </div>
+            <Spin>
+              数据加载中
+            </Spin>
             :
-            <div style={{ margin: '20px 30px' }}>
-              <textarea
-                className='textarea'
-                placeholder='请输入您要发布的内容...'
-                value={this.state.value}
-                onChange={(e) => this.handleChangeValue(e)}
-              >
-              </textarea>
-              <div className='save'>
-                <Button
-                  type='primary'
-                  onClick={this.handleClickSaveMessage}
-                >
-                  保存
-                </Button>
-              </div>
-              {
-                message.map((item, index) => {
-                  let time = transformTime(item.time)
+            message.map((item, index) => {
+              let time = transformTime(item.time)
 
-                  return (
-                    <div key={index} className='message-con' >
-                      <div>
-                        <span style={{ display: 'inline-block', marginRight: 146 }}>{time}</span>
-                        <Popconfirm
-                          placement='bottom'
-                          title='确认删除该信息吗？'
-                          onConfirm={() => this.handleClickDeleteMessage(item)}
-                        >
-                          <Button type='danger'>
-                            删除
-                    </Button>
-                        </Popconfirm>
-                      </div>
-                      <p className='content'>
-                        {item.content}
-                      </p>
+              return (
+                <div key={index} className='message-con' >
+                  <div>
+                    <span style={{ display: 'inline-block' }}>{time}</span>
+                    <div style={{ float: 'right', display: 'inline-block', marginRight: 22 }}>
+                      <Popconfirm
+                        placement='bottom'
+                        title='确认删除该信息吗？'
+                        onConfirm={() => this.handleClickDeleteMessage(item)}
+                      >
+                        <Button type='danger'>
+                          删除
+                        </Button>
+                      </Popconfirm>
                     </div>
-                  )
-                })
-              }
-            </div>
+                  </div>
+                  <p className='content'>
+                    {item.content}
+                  </p>
+                </div>
+              )
+            })
         }
       </div>
-
-
     )
   }
 }
