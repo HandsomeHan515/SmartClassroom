@@ -69,10 +69,16 @@ class Message extends Component {
             发布
           </Button>
         </div>
+
+        {
+          isFetching ? null : <h3 style={{ lineHeight: '50px' }}>已发布信息</h3>
+        }
         {
           isFetching ?
             <Spin>
-              数据加载中
+              <div style={{ textAlign: 'center' }}>
+                数据加载中...
+              </div>
             </Spin>
             :
             message.map((item, index) => {

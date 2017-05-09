@@ -30,9 +30,9 @@ ReactDOM.render(
       <Route path='/' name='home' staticName={true} component={App}>
         <IndexRoute name='home' staticName={true} component={Home} />
         <Route path='/search' name='search' staticName={true} component={Search} />
-        <Route path='/details' name='details' staticName={true} component={Details} />
+        <Route path='/detail' name='detail' staticName={true} component={Details} />
         <Route path='/personmessage' name='personmessage' staticName={true} component={PersonMessage} />
-        <Route path='/contacts' name='contacts' staticName={true} component={Contacts} />
+        <Route path='/message' name='message' staticName={true} component={Contacts} />
       </Route>
     </Router>
   </Provider>,
