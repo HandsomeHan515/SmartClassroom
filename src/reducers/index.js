@@ -36,9 +36,7 @@ export const status = combineReducers({
 const message = (state = [], action) => {
   switch (action.type) {
     case actions.GET_MESSAGE:
-      return [
-        ...action.message, ...state,
-      ]
+      return Object.assign([], state, action.message)
 
     case actions.ADD_RESULT_MESSAGE:
       return [
@@ -60,9 +58,7 @@ const message = (state = [], action) => {
 const detail = (state = [], action) => {
   switch (action.type) {
     case actions.GET_DETAIL:
-      return [
-        ...action.message, ...state,
-      ]
+      return Object.assign([], state, action.detail)
 
     case actions.ADD_RESULT_DETAIL:
       return [
