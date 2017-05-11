@@ -10,7 +10,7 @@ class App extends Component {
       <div>
         <Header />
 
-        <div style={{ width: 980, margin: '0 auto' }}>
+        <div style={{ minHeight: document.body.clientHeight - 240, width: 980, margin: '0 auto' }}>
           {this.props.children}
         </div>
 
