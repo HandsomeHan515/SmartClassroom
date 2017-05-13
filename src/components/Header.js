@@ -20,8 +20,7 @@ class Header extends Component {
       <div>
         <Affix>
           <Row>
-            <Col span={4}></Col>
-            <Col span={16}>
+            <Col span={16} offset={4}>
               <Menu mode='horizontal'>
                 {
                   navMenu.map((item, index) => {
