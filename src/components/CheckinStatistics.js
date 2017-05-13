@@ -71,7 +71,8 @@ class CheckinStatistics extends Component {
     const { detail } = this.props
     const columns = [
       {
-        title: 'Name', dataIndex: 'name', id: 'name', filterDropdown: (
+        title: 'Name', dataIndex: 'name', id: 'name',
+        filterDropdown: (
           <div className="custom-filter-dropdown">
             <Input
               ref={ele => this.searchInput = ele}

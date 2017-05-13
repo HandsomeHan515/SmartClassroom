@@ -58,7 +58,7 @@ class Message extends Component {
           className='textarea'
           placeholder='请输入您要发布的内容...'
           value={this.state.value}
-          onChange={(e) => this.handleChangeValue(e)}
+          onChange={e => this.handleChangeValue(e)}
         >
         </textarea>
         <div className='save'>
@@ -123,7 +123,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     getMessage,
     addMessage,
-    deleteMessage
+    deleteMessage,
   }, dispatch)
 }
 
