@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
+import { BackTop } from 'antd'
 
 import { Header, Footer } from './components'
-
-import { BackTop } from 'antd'
 
 class App extends Component {
   render() {
