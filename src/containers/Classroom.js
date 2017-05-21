@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
-import { DrawingBoard } from '../components'
+import { OnlineStatistics } from '../components'
 
 class Classroom extends Component {
   render() {
     return (
       <div>
-        <DrawingBoard />
+        <OnlineStatistics />
       </div>
     )
   }
