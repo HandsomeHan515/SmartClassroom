@@ -6,21 +6,13 @@ import { navMenu } from '../data'
 
 import '../css/Header.css'
 
-const content = (
-  <div className='change-button-con'>
-    <p><Link>登录</Link></p>
-    <p><Link>注册</Link></p>
-    <p><Link>修改密码</Link></p>
-  </div>
-)
-
 class Header extends Component {
   render() {
     return (
       <div>
         <Affix>
           <Row>
-            <Col span={16} offset={4}>
+            <Col span={20} offset={2}>
               <Menu mode='horizontal'>
                 {
                   navMenu.map((item, index) => {
@@ -35,11 +27,6 @@ class Header extends Component {
                   })
                 }
               </Menu>
-            </Col>
-            <Col className='change-button' span={4}>
-              <Popover content={content} placement='bottom' trigger='click' >
-                <Button type='primary'>个人设置</Button>
-              </Popover>
             </Col>
           </Row>
         </Affix>

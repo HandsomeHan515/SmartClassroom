@@ -68,11 +68,10 @@ class Login extends Component {
                   initialValue: true,
                 })(<Checkbox>记住密码</Checkbox>)
               }
-              <Link className="login-form-forgot">忘记密码？</Link>
+              <Link to='/signup' className="login-form-forgot">注册</Link>
               <Button type="primary" htmlType="submit" className="login-form-button loginbtn">
                 登录
               </Button>
-              <Link to='/signup'>马上注册</Link>
             </FormItem>
           </Form>
         </div>
