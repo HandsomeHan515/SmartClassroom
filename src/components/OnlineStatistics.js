@@ -14,12 +14,6 @@ class OnlineStatistics extends Component {
     }
   }
 
-  send = () => {
-    this.setState({
-      visible: false
-    })
-  }
-
   cancelSend = () => {
     this.setState({
       visible: false
@@ -39,9 +33,9 @@ class OnlineStatistics extends Component {
       <Modal
         width={980}
         visible={this.state.visible}
-        onCancel={this.send}
-        onOk={this.cancelSend}
+        onCancel={this.cancelSend}
         title='未出勤人员名单'
+        footer={null}
       >
         <Table
           rowKey='id'
