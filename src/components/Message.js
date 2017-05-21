@@ -100,7 +100,7 @@ class Message extends Component {
                       </Popconfirm>
                     </div>
                   </div>
-                  <p className='content'>
+                  <p className='msg-content'>
                     {item.content}
                   </p>
                 </div>
