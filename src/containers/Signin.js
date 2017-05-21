@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 import { Form, Icon, Input, Button, Checkbox, Carousel } from 'antd'
 
 import '../css/Login.css'
@@ -43,7 +44,7 @@ class Login extends Component {
         </Carousel>
         <div className="login-position">
           <h2 className="login-header">智慧教室管理系统</h2>
-          <Form onSubmit={this.handleSubmit} className="login-form">
+          <Form onSubmit={this.handleSubmit}>
             <FormItem>
               {
                 getFieldDecorator('userName', {
@@ -67,10 +68,11 @@ class Login extends Component {
                   initialValue: true,
                 })(<Checkbox>记住密码</Checkbox>)
               }
-              <a className="login-form-forgot">忘记密码？</a>
+              <Link className="login-form-forgot">忘记密码？</Link>
               <Button type="primary" htmlType="submit" className="login-form-button loginbtn">
                 登录
               </Button>
+              <Link to='/signup'>马上注册</Link>
             </FormItem>
           </Form>
         </div>

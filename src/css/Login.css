@@ -1,29 +1,9 @@
-.ant-input-group{
-  border-radius: none;
-}
-.login-form{
-  border-radius: none !important;
-}
 .loginbtn{
-  width: 100% !important;
+  width: 100%;
 }
+
 .login-form-forgot{
-  float: right !important;
-}
-.ant-input-group-addon{
-  border-radius: none !important;
-  border-color: #d2d6de !important;
-}
-.ant-input{
-   border-radius: none !important;
-  border-color: #d2d6de !important;
-  outline: none !important;
-}
-.anticon-user{
-  color: #777 !important;
-}
-.anticon-lock{
-  color: #777 !important;
+  float: right;
 }
 
 .login-position {
