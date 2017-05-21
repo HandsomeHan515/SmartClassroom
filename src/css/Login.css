@@ -1,0 +1,58 @@
+.ant-input-group{
+  border-radius: none;
+}
+.login-form{
+  border-radius: none !important;
+}
+.loginbtn{
+  width: 100% !important;
+}
+.login-form-forgot{
+  float: right !important;
+}
+.ant-input-group-addon{
+  border-radius: none !important;
+  border-color: #d2d6de !important;
+}
+.ant-input{
+   border-radius: none !important;
+  border-color: #d2d6de !important;
+  outline: none !important;
+}
+.anticon-user{
+  color: #777 !important;
+}
+.anticon-lock{
+  color: #777 !important;
+}
+
+.login-position {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 400px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 6px;
+}
+
+.login-header {
+  width: 100%;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 200;
+  color: #49A9EE;
+}
+
+.loginbg1{
+    background-image: url("../images/bg1.jpg");
+    background-size: cover;
+    background-position: 50% 50%;
+}
+.loginbg2{
+    background-image: url("../images/bg2.jpg");
+    background-size: cover;
+    background-position: 50% 50%;
+}

@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
 
 import App from './App'
-import { Home, Search, Details, Contacts, Classroom } from './containers'
+import { Home, Search, Details, Contacts, Classroom, Signin } from './containers'
 
 import { reducer } from './reducers'
 import rootSaga from './sagas'
@@ -34,6 +34,7 @@ ReactDOM.render(
         <Route path='/message' name='message' staticName={true} component={Contacts} />
         <Route path='/classroom' name='classroom' staticName={true} component={Classroom} />
       </Route>
+      <Route path='/signin' name='login' staticName={true} component={Signin} />
     </Router>
   </Provider>,
   document.getElementById('root')
