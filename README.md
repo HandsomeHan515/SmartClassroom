@@ -1,11 +1,11 @@
 ### First 
-  git install 安装依赖包
+  npm install
 
 ### Second 
-  git start 
+  npm start or yarn start
 
 ### Third
-  address: localhost:3000 || 127.0.0.1:3000
+  open at address: "localhost:3000" or "127.0.0.1:3000"
 
 ### Fourth
   ending...
