@@ -16,7 +16,6 @@ class Home extends Component {
             <div><img className='img' src={images.banner3} alt="banner3" /></div>
           </Carousel>
         </div>
-
         <Row type='flex' justify='center' className='homeText'>
           欢迎HandsomeHan同学来到智慧教室管理系统！！！
         </Row>

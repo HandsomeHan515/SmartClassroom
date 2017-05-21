@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Table, Button, Modal } from 'antd'
 
+import RandomName from './RandomName'
+
 import { student } from '../data'
 
 import '../css/OnlineStatistics.css'
@@ -10,8 +12,14 @@ class OnlineStatistics extends Component {
     super(props)
 
     this.state = {
-      visible: false
+      visible: false,
     }
+  }
+
+  showModal = () => {
+    this.setState({
+      visible: true
+    })
   }
 
   cancelSend = () => {
@@ -74,12 +82,13 @@ class OnlineStatistics extends Component {
           <span>该班级总人数：{student.length}</span>
           <span className="header">当前在线人数： {online}</span>
           <span className="header">当前离线人数： {offline}</span>
+          <RandomName />
           {
             !offline ? null :
               <Button
                 type='danger'
                 style={{ float: 'right', marginRight: 30 }}
-                onClick={() => { this.setState({ visible: true }) }}
+                onClick={this.showModal}
               >
                 点击查看缺勤学生信息
               </Button>

@@ -1,0 +1,26 @@
+.number {
+  width: 30px;
+  line-height: 14px;
+  outline: 0;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+.select {
+  height: 100px;
+  line-height: 100px;
+  font-size: 30px;
+  text-align: center;
+  color: #666;
+}
+
+.select-con {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.text {
+  font-size: 30px;
+  text-align: center;
+}

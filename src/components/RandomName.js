@@ -1,19 +1,29 @@
 import React, { Component } from 'react'
 import { Row, Col, Button, Modal } from 'antd'
 
+import Timer from './Timer'
+
+import { student } from '../data'
+
+import '../css/RandomName.css'
+
 class RandomName extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       visible: false,
-      student: '点击开始按钮',
-      time: 0,
-      peopleNum: 0,
+      time: 3,
+      number: 1,
+      text: '请点击开始按钮',
+      timerVisible: false,
     }
 
-    //定时器
     this.timer = null
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer)
   }
 
   showModal = () => {
@@ -29,7 +39,9 @@ class RandomName extends Component {
 
     this.setState({
       visible: false,
-      student: '点击开始按钮',
+      time: 3,
+      number: 1,
+      text: '请点击开始按钮'
     })
   }
 
@@ -37,109 +49,131 @@ class RandomName extends Component {
     clearTimeout(this.timer)
 
     this.setState({
-      student: '点击开始按钮'
+      time: 3,
+      number: 1,
+      text: '请点击开始按钮',
     })
   }
 
   start = () => {
     clearTimeout(this.timer)
 
-    let arr = []
-    let newStu = []
-    while (arr.length < this.state.peopleNum) {
+    let arr = [], newStu = []
+    while (arr.length < this.state.number) {
       let flag = true
-      let selectNum = Math.floor(Math.random() * students.length)
+      const select = Math.floor(Math.random() * student.length)
+
       if (!arr.length) {
-        arr.push(selectNum)
-        newStu.push(students[selectNum].name)
+        arr.push(select)
+        newStu.push(student[select].name)
       }
 
       for (let i = 0; i < arr.length; i++) {
-        if (selectNum === arr[i]) {
+        if (select === arr[i]) {
           flag = false
         }
       }
 
       if (flag) {
-        arr.push(selectNum)
-        newStu.push(students[selectNum].name)
+        arr.push(select)
+        newStu.push(student[select].name)
       }
     }
 
+    const text = newStu.map((item, index) => {
+      if (index === newStu.length - 1) {
+        return (
+          <span key={index} className="select-con">{item}</span>
+        )
+      }
+      return (
+        <span key={index} className="select-con">{item}、 </span>
+      )
+    })
     this.setState({
-      student: newStu.map((item, index) => <span key={index} style={{ display: 'inline-block', marginLeft: 10 }}>{item}</span>)
+      timerVisible: false,
+      text,
     })
   }
 
   timeChange = e => {
     clearTimeout(this.timer)
 
-    if (e.target.value < 0) {
-      e.target.value = 0
+    let time = e.target.value
+    if (time < 0) {
+      time = 0
     }
 
     this.setState({
-      time: e.target.value
+      time
     })
   }
 
-  peopleNumChange = e => {
+  numberChange = e => {
     clearTimeout(this.timer)
 
-    if (e.target.value < 0) {
-      e.target.value = 0
+    let number = e.target.value
+    if (number < 0) {
+      number = 0
     }
 
     this.setState({
-      peopleNum: e.target.value
+      number
     })
   }
 
   select = () => {
     clearTimeout(this.timer)
-
     this.timer = setTimeout(this.start, this.state.time * 1000)
+
+    this.setState({
+      timerVisible: true,
+      text: '',
+    })
   }
 
   render() {
+    const { text, time, number, visible, timerVisible } = this.state
+
     return (
-      <div style={{ display: 'inline-block' }}>
-        <span onClick={this.showModal}>随机点名</span>
+      <div style={{ display: 'inline-block', marginLeft: 30, float: 'right' }}>
+        <Button type='primary' onClick={this.showModal}>随机点名</Button>
         <Modal
           style={{ top: 300 }}
           footer={false}
-          visible={this.state.visible}
+          visible={visible}
+          title='随机点名'
           onCancel={this.cancelSend}
         >
-          <Row type='flex' style={{ height: 60, lineHeight: '60px' }}>
-            <Col span={6} style={{ fontSize: 18 }}>随机点名</Col>
-            <Col span={4} offset={8}>
+          <Row type='flex' style={{ height: 40, lineHeight: '40px' }}>
+            <Col span={4} offset={13}>
               <span>人数：</span>
               <input
                 type="number"
-                value={this.state.peopleNum}
-                onChange={this.peopleNumChange}
-                style={{ width: 30, lineHeight: '14px', outline: 'none' }}
+                className="number"
+                value={number}
+                onChange={this.numberChange}
               />
+              <span>人</span>
             </Col>
-            <Col span={6}>
+            <Col span={6} offset={1}>
               <span>倒数计数：</span>
               <input
                 type="number"
-                value={this.state.time}
+                className="number"
+                value={time}
                 onChange={this.timeChange}
-                style={{ width: 30, lineHeight: '14px', outline: 'none' }}
               />
               <span>秒</span>
             </Col>
           </Row>
-          <div style={{ height: 100, lineHeight: '100px', fontSize: 20, textAlign: 'center' }}>
-            {this.state.student}
+          <div className="select">
+            {text ? <span>{text}</span> : <Timer time={time} start={timerVisible} />}
           </div>
           <Row type='flex'>
-            <Col span={3} offset={15}><Button onClick={this.cancelSend}>退出</Button></Col>
-            <Col span={3}><Button onClick={this.reset}>重设</Button></Col>
-            <Col span={3}><Button onClick={this.select}>开始</Button></Col>
+            <Col span={3} offset={13}><Button onClick={this.select}>开始</Button></Col>
+            <Col span={3} offset={1}><Button onClick={this.reset}>重设</Button></Col>
+            <Col span={3} offset={1}><Button onClick={this.cancelSend}>退出</Button></Col>
           </Row>
         </Modal>
       </div >
