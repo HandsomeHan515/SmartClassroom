@@ -9,6 +9,8 @@ export const address = {
 
   detail: `${serviceDomain}/details/`,
 
-  message: `${serviceDomain}/messages/`
+  message: `${serviceDomain}/messages/`,
+
+  student: `${serviceDomain}/students/`,
 }
 

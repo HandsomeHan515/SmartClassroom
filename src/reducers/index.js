@@ -31,6 +31,7 @@ const changeStatus = types => {
 export const status = combineReducers({
   message: changeStatus([actions.messageStatus.REQUEST, actions.messageStatus.SUCCESS, actions.messageStatus.FAILURE]),
   detail: changeStatus([actions.detailStatus.REQUEST, actions.detailStatus.SUCCESS, actions.detailStatus.FAILURE]),
+  student: changeStatus([actions.studentStatus.REQUEST, actions.studentStatus.SUCCESS, actions.studentStatus.FAILURE]),
 })
 
 const message = (state = [], action) => {
@@ -71,9 +72,20 @@ const detail = (state = [], action) => {
   }
 }
 
+const student = (state = [], action) => {
+  switch (action.type) {
+    case actions.GET_STUDENT:
+      return Object.assign([], state, action.student)
+
+    default:
+      return state
+  }
+}
+
 export const result = combineReducers({
   message,
   detail,
+  student,
 })
 
 export const reducer = combineReducers({

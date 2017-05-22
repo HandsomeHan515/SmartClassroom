@@ -75,13 +75,20 @@ export const state = {
     detail: {
       isFetching: true,
       isFailed: false,
-      errMsg: ''
+      errMsg: '',
     },
 
     message: {
       isFetching: true,
       isFailed: false,
-      errMsg: ''
-    }
+      errMsg: '',
+    },
+
+    student: {
+      isFetching: true,
+      isFailed: false,
+      errMsg: '',
+    },
+
   }
 }

@@ -3,8 +3,6 @@ import { Row, Col, Button, Modal } from 'antd'
 
 import Timer from './Timer'
 
-import { student } from '../data'
-
 import '../css/RandomName.css'
 
 class RandomName extends Component {
@@ -57,15 +55,16 @@ class RandomName extends Component {
 
   start = () => {
     clearTimeout(this.timer)
+    const { online } = this.props
 
     let arr = [], newStu = []
     while (arr.length < this.state.number) {
       let flag = true
-      const select = Math.floor(Math.random() * student.length)
+      const select = Math.floor(Math.random() * online.length)
 
       if (!arr.length) {
         arr.push(select)
-        newStu.push(student[select].name)
+        newStu.push(online[select].name)
       }
 
       for (let i = 0; i < arr.length; i++) {
@@ -76,7 +75,7 @@ class RandomName extends Component {
 
       if (flag) {
         arr.push(select)
-        newStu.push(student[select].name)
+        newStu.push(online[select].name)
       }
     }
 

@@ -75,3 +75,8 @@ export const updateDetail = detailID => (
     isJson: false,
   })
 )
+
+//Student
+export const getStudent = () => (
+  get({ url: address.student })
+)

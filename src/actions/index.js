@@ -52,3 +52,10 @@ export const getDetail = () => action(DETAIL)
 
 export const addDetail = payload => action(ADD_DETAIL, payload)
 
+//Student
+export const STUDENT = 'STUDENT'
+export const GET_STUDENT = 'GET_STUDENT'
+
+export const studentStatus = createRequestTypes('STUDENT')
+
+export const getStudent = () => action(STUDENT)

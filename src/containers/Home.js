@@ -17,7 +17,7 @@ class Home extends Component {
           </Carousel>
         </div>
         <Row type='flex' justify='center' className='homeText'>
-          欢迎HandsomeHan同学来到智慧教室管理系统！！！
+          欢迎王老师来到智慧教室管理系统！！！
         </Row>
       </div>
     )

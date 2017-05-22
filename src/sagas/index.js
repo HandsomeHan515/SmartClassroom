@@ -64,15 +64,22 @@ export function* watchAddDetail() {
   }
 }
 
-// export function* watchUpdateDetail() {
-//   while (true) {
-//     const { payload } = yield take(actions.DEL_MESSAGE)
-//     const { id } = payload
+export function* watchGetStudent() {
+  while (true) {
+    yield take(actions.STUDENT)
+    yield put({ type: actions.studentStatus.REQUEST })
 
-//     yield call(apis.delMessage, id)
-//     yield put({ type: actions.DEL_RESULT_MESSAGE, id })
-//   }
-// }
+    try {
+      const student = yield call(apis.getStudent)
+
+      yield put({ type: actions.GET_STUDENT, student: student.reverse() })
+
+      yield put({ type: actions.studentStatus.SUCCESS })
+    } catch (err) {
+      yield put({ type: actions.studentStatus.FAILURE })
+    }
+  }
+}
 
 export default function* rootSage() {
   yield [
@@ -81,5 +88,6 @@ export default function* rootSage() {
     fork(watchDelMessage),
     fork(watchGetDetail),
     fork(watchAddDetail),
+    fork(watchGetStudent),
   ]
 }

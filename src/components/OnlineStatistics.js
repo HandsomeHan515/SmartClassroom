@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Table, Button, Modal } from 'antd'
 
 import RandomName from './RandomName'
 
-import { student } from '../data'
+import { getStudent } from '../actions'
 
 import '../css/OnlineStatistics.css'
 
@@ -14,6 +16,10 @@ class OnlineStatistics extends Component {
     this.state = {
       visible: false,
     }
+  }
+
+  componentWillMount() {
+    this.props.getStudent()
   }
 
   showModal = () => {
@@ -29,12 +35,13 @@ class OnlineStatistics extends Component {
   }
 
   renderModal = props => {
-    const { students } = props
+    const { offline } = props
     const columns = [
       { title: '姓名', dataIndex: 'name', id: 'name', width: '30%' },
       { title: '学号', dataIndex: 'studentID', id: 'sid' },
       { title: '职务', dataIndex: 'duty', id: 'duty' },
       { title: '手机号码', dataIndex: 'phone', id: 'phone' },
+      { title: '邮箱', dataIndex: 'email', id: 'email' },
     ]
 
     return (
@@ -48,7 +55,7 @@ class OnlineStatistics extends Component {
         <Table
           rowKey='id'
           bordered
-          dataSource={students}
+          dataSource={offline}
           columns={columns}
         />
       </Modal>
@@ -56,6 +63,7 @@ class OnlineStatistics extends Component {
   }
 
   render() {
+    const { student } = this.props
     const columns = [
       { title: '姓名', dataIndex: 'name', id: 'name', width: '30%' },
       { title: '学号', dataIndex: 'studentID', id: 'sid' },
@@ -65,16 +73,15 @@ class OnlineStatistics extends Component {
 
     let online = 0, offline = 0
     for (let item of student) {
-      if (item.status === '在线') {
+      if (item.status === 'online') {
         online++
       } else {
         offline++
       }
     }
 
-    const offlineStudens = student.filter(item => item.status === '离线')
-
-    console.log('status: %o', offlineStudens, online, offline)
+    const offlineStudents = student.filter(item => item.status === 'offline')
+    const onlineStudents = student.filter(item => item.status === 'online')
 
     return (
       <div>
@@ -82,7 +89,7 @@ class OnlineStatistics extends Component {
           <span>该班级总人数：{student.length}</span>
           <span className="header">当前在线人数： {online}</span>
           <span className="header">当前离线人数： {offline}</span>
-          <RandomName />
+          <RandomName online={onlineStudents} />
           {
             !offline ? null :
               <Button
@@ -100,10 +107,25 @@ class OnlineStatistics extends Component {
           dataSource={student}
           columns={columns}
         />
-        <this.renderModal students={offlineStudens} />
+        <this.renderModal offline={offlineStudents} />
       </div>
     )
   }
 }
 
-export default OnlineStatistics
+const mapStateToProps = state => {
+  return ({
+    student: state.result.student
+  })
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    getStudent
+  }, dispatch)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OnlineStatistics)
