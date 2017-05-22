@@ -37,7 +37,7 @@ class OnlineStatistics extends Component {
   renderModal = props => {
     const { offline } = props
     const columns = [
-      { title: '姓名', dataIndex: 'name', id: 'name', width: '30%' },
+      { title: '姓名', dataIndex: 'name', id: 'name', width: '20%' },
       { title: '学号', dataIndex: 'studentID', id: 'sid' },
       { title: '职务', dataIndex: 'duty', id: 'duty' },
       { title: '手机号码', dataIndex: 'phone', id: 'phone' },
@@ -65,8 +65,9 @@ class OnlineStatistics extends Component {
   render() {
     const { student } = this.props
     const columns = [
-      { title: '姓名', dataIndex: 'name', id: 'name', width: '30%' },
+      { title: '姓名', dataIndex: 'name', id: 'name', width: '20%' },
       { title: '学号', dataIndex: 'studentID', id: 'sid' },
+      { title: '班级', dataIndex: 'classroom', id: 'classroom' },
       { title: '职务', dataIndex: 'duty', id: 'duty' },
       { title: '状态', dataIndex: 'status', id: 'status' },
     ]
@@ -115,7 +116,8 @@ class OnlineStatistics extends Component {
 
 const mapStateToProps = state => {
   return ({
-    student: state.result.student
+    student: state.result.student,
+    isFetching: state.status.student.isFetching,
   })
 }
 
