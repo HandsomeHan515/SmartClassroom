@@ -74,15 +74,15 @@ class OnlineStatistics extends Component {
 
     let online = 0, offline = 0
     for (let item of student) {
-      if (item.status === 'online') {
+      if (item.status === '在线') {
         online++
       } else {
         offline++
       }
     }
 
-    const offlineStudents = student.filter(item => item.status === 'offline')
-    const onlineStudents = student.filter(item => item.status === 'online')
+    const offlineStudents = student.filter(item => item.status === '离线')
+    const onlineStudents = student.filter(item => item.status === '在线')
 
     return (
       <div>
