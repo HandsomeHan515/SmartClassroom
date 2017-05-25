@@ -2,15 +2,15 @@
  * Global app variables and infomation
  */
 
-const serviceDomain = 'http://127.0.0.1:8000'
+const serviceDomain = 'http://127.0.0.1:8001'
 
 export const address = {
   domain: serviceDomain,
 
-  detail: `${serviceDomain}/details/`,
+  detail: `${serviceDomain}/detail/`,
 
-  message: `${serviceDomain}/messages/`,
+  message: `${serviceDomain}/message/`,
 
-  student: `${serviceDomain}/students/`,
+  student: `${serviceDomain}/student/`,
 }
 

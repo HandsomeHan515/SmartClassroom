@@ -90,5 +90,17 @@ export const state = {
       errMsg: '',
     },
 
+    nameSearch: {
+      isFetching: true,
+      isFailed: false,
+      errMsg: '',
+    },
+
+    sidSearch: {
+      isFetching: true,
+      isFailed: false,
+      errMsg: '',
+    },
+
   }
 }

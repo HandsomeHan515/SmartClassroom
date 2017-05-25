@@ -59,3 +59,18 @@ export const GET_STUDENT = 'GET_STUDENT'
 export const studentStatus = createRequestTypes('STUDENT')
 
 export const getStudent = () => action(STUDENT)
+
+//Search
+export const NAME_SEARCH = 'NAME_SEARCH'
+export const GET_NAME_SEARCH = 'GET_NAME_SEARCH'
+
+export const nameSearchStatus = createRequestTypes('NAME_SEARCH')
+
+export const getNameSerch = payload => action(NAME_SEARCH, payload)
+
+export const SID_SEARCH = 'SID_SEARCH'
+export const GET_SID_SEARCH = 'GET_SID_SEARCH'
+
+export const sidSearchStatus = createRequestTypes('SID_SEARCH')
+
+export const getSidSearch = payload => action(SID_SEARCH, payload)

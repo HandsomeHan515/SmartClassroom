@@ -80,3 +80,13 @@ export const updateDetail = detailID => (
 export const getStudent = () => (
   get({ url: address.student })
 )
+
+//NameSearch
+export const getNameSearch = name => (
+  get({ url: `${address.student}?name=${name}` })
+)
+
+//SIDSearch
+export const getSidSearch = studentID => (
+  get({ url: `${address.student}?studentID=${studentID}` })
+)

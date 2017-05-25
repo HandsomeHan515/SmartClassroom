@@ -81,6 +81,41 @@ export function* watchGetStudent() {
   }
 }
 
+export function* watchGetNameSearch() {
+  while (true) {
+    const { name } = yield take(actions.NAME_SEARCH)
+    yield put({ type: actions.nameSearchStatus.REQUEST })
+
+    try {
+      const student = yield call(apis.getNameSearch, name)
+
+      yield put({ type: actions.GET_NAME_SEARCH, student })
+      yield put({ type: actions.nameSearchStatus.SUCCESS })
+    } catch (err) {
+      yield put({ type: actions.nameSearchStatus.FAILURE })
+      console.log('get name search filure', err)
+    }
+  }
+}
+
+export function* watchGetSidSearch() {
+  while (true) {
+    const { studentID } = yield take(actions.SID_SEARCH)
+
+    yield put({ type: actions.sidSearchStatus.REQUEST })
+
+    try {
+      const student = yield call(apis.getSidSearch, studentID)
+
+      yield put({ type: actions.GET_SID_SEARCH, student })
+      yield put({ type: actions.sidSearchStatus.SUCCESS })
+    } catch (err) {
+      yield put({ type: actions.sidSearchStatus.FAILURE })
+      console.log('get name search filure', err)
+    }
+  }
+}
+
 export default function* rootSage() {
   yield [
     fork(watchGetMessage),
@@ -89,5 +124,7 @@ export default function* rootSage() {
     fork(watchGetDetail),
     fork(watchAddDetail),
     fork(watchGetStudent),
+    fork(watchGetNameSearch),
+    fork(watchGetSidSearch),
   ]
 }
