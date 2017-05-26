@@ -83,7 +83,7 @@ export const getStudent = () => (
 
 //NameSearch
 export const getNameSearch = name => (
-  get({ url: `${address.student}?name=${name}` })
+  get({ url: `${address.detail}?name=${name}` })
 )
 
 //SIDSearch

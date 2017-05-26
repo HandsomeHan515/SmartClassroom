@@ -5,6 +5,8 @@ import { Input, Modal, Table } from 'antd'
 
 import { getNameSerch, getSidSearch } from '../actions'
 
+import { transformTime } from '../method/time'
+
 import '../css/SearchCon.css'
 
 const Search = Input.Search
@@ -24,19 +26,21 @@ class SearchCon extends Component {
   renderModal = () => {
     const { nameSearch, sidSearch } = this.props
     const { type } = this.state
-    let students = []
+    let students = [], title = ''
     if (type === 1) {
       students = nameSearch
+      title = '按名称--查询名单'
     } else if (type === 2) {
       students = sidSearch
+      title = '按学号--查询名单'
     }
+
 
     const columns = [
       { title: '姓名', dataIndex: 'name', id: 'name', width: '20%', render: name => name.username },
-      { title: '学号', dataIndex: 'studentID', id: 'sid' },
-      { title: '职务', dataIndex: 'duty', id: 'duty' },
-      { title: '手机号码', dataIndex: 'phone', id: 'phone' },
-      { title: '邮箱', dataIndex: 'email', id: 'email' },
+      { title: '开始时间', dataIndex: 'start', id: 'start', render: start => transformTime(start, '年') },
+      { title: '结束时间', dataIndex: 'end', id: 'end', render: end => transformTime(end, '年') },
+      { title: 'IP地址', dataIndex: 'ip', id: 'ip' },
     ]
 
     return (
@@ -45,7 +49,7 @@ class SearchCon extends Component {
         onCancel={() => this.setState({ visible: false })}
         footer={null}
         width={980}
-        title='按名称--查询名单'
+        title={title}
       >
         <Table
           rowKey='id'

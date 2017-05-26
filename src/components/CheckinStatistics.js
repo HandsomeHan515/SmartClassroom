@@ -88,13 +88,13 @@ class CheckinStatistics extends Component {
         filterDropdownVisible: this.state.filterDropdownVisible,
         onFilterDropdownVisibleChange: visible => this.setState({ filterDropdownVisible: visible }, () => this.searchInput.focus()
         ),
+        render: name => name.username,
         width: '10%'
       },
-      { title: 'Start', dataIndex: 'start', id: 'start', render: start => transformTime(start, '年'), width: '20%' },
-      { title: 'End', dataIndex: 'end', id: 'end', render: end => transformTime(end, '年'), width: '20%' },
-      { title: 'Duration', dataIndex: 'duration', id: 'duration', render: duration => timeDuration(duration), width: '20%' },
-      { title: 'IP', dataIndex: 'ip', id: 'ip', width: '20%' },
-      { title: 'Times', dataIndex: 'times', id: 'times', sorter: (a, b) => a.times - b.times, width: '20%' }
+      { title: '开始时间', dataIndex: 'start', id: 'start', render: start => transformTime(start, '年'), width: '20%' },
+      { title: '结束时间', dataIndex: 'end', id: 'end', render: end => transformTime(end, '年'), width: '20%' },
+      { title: '在线时长', dataIndex: 'duration', id: 'duration', render: duration => timeDuration(duration), width: '20%' },
+      { title: 'IP地址', dataIndex: 'ip', id: 'ip', width: '20%' },
     ]
 
     return (

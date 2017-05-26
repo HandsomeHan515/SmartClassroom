@@ -10,7 +10,7 @@ export function* watchGetMessage() {
     try {
       const message = yield call(apis.getMessage)
 
-      yield put({ type: actions.GET_MESSAGE, message: message.reverse() })
+      yield put({ type: actions.GET_MESSAGE, message })
 
       yield put({ type: actions.messageStatus.SUCCESS })
     } catch (err) {
@@ -46,7 +46,7 @@ export function* watchGetDetail() {
     try {
       const detail = yield call(apis.getDetail)
 
-      yield put({ type: actions.GET_DETAIL, detail: detail.reverse() })
+      yield put({ type: actions.GET_DETAIL, detail })
 
       yield put({ type: actions.detailStatus.SUCCESS })
     } catch (err) {
