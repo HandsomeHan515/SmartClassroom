@@ -32,7 +32,7 @@ class SearchCon extends Component {
     }
 
     const columns = [
-      { title: '姓名', dataIndex: 'name', id: 'name', width: '20%' },
+      { title: '姓名', dataIndex: 'name', id: 'name', width: '20%', render: name => name.username },
       { title: '学号', dataIndex: 'studentID', id: 'sid' },
       { title: '职务', dataIndex: 'duty', id: 'duty' },
       { title: '手机号码', dataIndex: 'phone', id: 'phone' },
