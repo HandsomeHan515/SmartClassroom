@@ -68,9 +68,9 @@ export const nameSearchStatus = createRequestTypes('NAME_SEARCH')
 
 export const getNameSerch = payload => action(NAME_SEARCH, payload)
 
-export const SID_SEARCH = 'SID_SEARCH'
-export const GET_SID_SEARCH = 'GET_SID_SEARCH'
+export const TIME_SEARCH = 'TIME_SEARCH'
+export const GET_TIME_SEARCH = 'GET_TIME_SEARCH'
 
-export const sidSearchStatus = createRequestTypes('SID_SEARCH')
+export const timeSearchStatus = createRequestTypes('TIME_SEARCH')
 
-export const getSidSearch = payload => action(SID_SEARCH, payload)
+export const getTimeSearch = payload => action(TIME_SEARCH, payload)

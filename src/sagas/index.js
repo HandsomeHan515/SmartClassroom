@@ -88,9 +88,10 @@ export function* watchGetNameSearch() {
 
     try {
       const student = yield call(apis.getNameSearch, name)
-
-      yield put({ type: actions.GET_NAME_SEARCH, student })
-      yield put({ type: actions.nameSearchStatus.SUCCESS })
+      if (student.length) {
+        yield put({ type: actions.GET_NAME_SEARCH, student })
+        yield put({ type: actions.nameSearchStatus.SUCCESS })
+      }
     } catch (err) {
       yield put({ type: actions.nameSearchStatus.FAILURE })
       console.log('get name search filure', err)
@@ -98,19 +99,19 @@ export function* watchGetNameSearch() {
   }
 }
 
-export function* watchGetSidSearch() {
+export function* watchGetTimeSearch() {
   while (true) {
-    const { studentID } = yield take(actions.SID_SEARCH)
+    const { time } = yield take(actions.TIME_SEARCH)
 
-    yield put({ type: actions.sidSearchStatus.REQUEST })
+    yield put({ type: actions.timeSearchStatus.REQUEST })
 
     try {
-      const student = yield call(apis.getSidSearch, studentID)
+      const student = yield call(apis.getTimeSearch, time)
 
-      yield put({ type: actions.GET_SID_SEARCH, student })
-      yield put({ type: actions.sidSearchStatus.SUCCESS })
+      yield put({ type: actions.GET_TIME_SEARCH, student })
+      yield put({ type: actions.timeSearchStatus.SUCCESS })
     } catch (err) {
-      yield put({ type: actions.sidSearchStatus.FAILURE })
+      yield put({ type: actions.timeSearchStatus.FAILURE })
       console.log('get name search filure', err)
     }
   }
@@ -125,6 +126,6 @@ export default function* rootSage() {
     fork(watchAddDetail),
     fork(watchGetStudent),
     fork(watchGetNameSearch),
-    fork(watchGetSidSearch),
+    fork(watchGetTimeSearch),
   ]
 }

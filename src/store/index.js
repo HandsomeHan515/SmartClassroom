@@ -96,7 +96,7 @@ export const state = {
       errMsg: '',
     },
 
-    sidSearch: {
+    timeSearch: {
       isFetching: true,
       isFailed: false,
       errMsg: '',

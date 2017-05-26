@@ -33,7 +33,7 @@ export const status = combineReducers({
   detail: changeStatus([actions.detailStatus.REQUEST, actions.detailStatus.SUCCESS, actions.detailStatus.FAILURE]),
   student: changeStatus([actions.studentStatus.REQUEST, actions.studentStatus.SUCCESS, actions.studentStatus.FAILURE]),
   nameSearch: changeStatus([actions.nameSearchStatus.REQUEST, actions.nameSearchStatus.SUCCESS, actions.nameSearchStatus.FAILURE]),
-  sidSearch: changeStatus([actions.sidSearchStatus.REQUEST, actions.sidSearchStatus.SUCCESS, actions.sidSearchStatus.FAILURE]),
+  timeSearch: changeStatus([actions.timeSearchStatus.REQUEST, actions.timeSearchStatus.SUCCESS, actions.timeSearchStatus.FAILURE]),
 })
 
 const message = (state = [], action) => {
@@ -94,9 +94,9 @@ const nameSearch = (state = [], action) => {
   }
 }
 
-const sidSearch = (state = [], action) => {
+const timeSearch = (state = [], action) => {
   switch (action.type) {
-    case actions.GET_SID_SEARCH:
+    case actions.GET_TIME_SEARCH:
       return action.student
 
     default:
@@ -109,7 +109,7 @@ export const result = combineReducers({
   detail,
   student,
   nameSearch,
-  sidSearch,
+  timeSearch,
 })
 
 export const reducer = combineReducers({

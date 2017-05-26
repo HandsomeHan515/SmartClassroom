@@ -87,6 +87,6 @@ export const getNameSearch = name => (
 )
 
 //SIDSearch
-export const getSidSearch = studentID => (
-  get({ url: `${address.detail}?date=${studentID}` })
+export const getTimeSearch = time => (
+  get({ url: `${address.detail}?date=${time}` })
 )

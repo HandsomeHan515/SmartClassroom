@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Input, Modal, Table } from 'antd'
 
-import { getNameSerch, getSidSearch } from '../actions'
+import { getNameSerch, getTimeSearch } from '../actions'
 
 import { transformTime } from '../method/time'
 
@@ -17,21 +17,21 @@ class SearchCon extends Component {
 
     this.state = {
       name: '',
-      studentID: null,
+      time: null,
       visible: false,
       type: 0,
     }
   }
 
   renderModal = () => {
-    const { nameSearch, sidSearch } = this.props
+    const { nameSearch, timeSearch } = this.props
     const { type } = this.state
     let students = [], title = ''
     if (type === 1) {
       students = nameSearch
       title = '按名称--查询名单'
     } else if (type === 2) {
-      students = sidSearch
+      students = timeSearch
       title = '按学号--查询名单'
     }
 
@@ -62,12 +62,12 @@ class SearchCon extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { nameIsFetching, sidIsFetching } = nextProps
+    const { nameIsFetching, timeIsFetching } = nextProps
     if (!nameIsFetching) {
       this.setState({
         visible: true,
       })
-    } else if (!sidIsFetching) {
+    } else if (!timeIsFetching) {
       this.setState({
         visible: true
       })
@@ -97,16 +97,16 @@ class SearchCon extends Component {
         <Search
           placeholder='按时间检索 格式：XXXX-X-X'
           style={{ width: 666, marginTop: 50 }}
-          value={this.state.studentID}
+          value={this.state.time}
           className='search'
-          onChange={e => this.setState({ studentID: e.target.value })}
-          onSearch={studentID => {
-            if (studentID) {
-              this.props.getSidSearch({ studentID })
+          onChange={e => this.setState({ time: e.target.value })}
+          onSearch={time => {
+            if (time) {
+              this.props.getTimeSearch({ time })
 
               this.setState({
                 type: 2,
-                studentID: null,
+                time: null,
               })
             }
           }}
@@ -120,16 +120,16 @@ class SearchCon extends Component {
 const mapStateToProps = state => {
   return ({
     nameSearch: state.result.nameSearch,
-    sidSearch: state.result.sidSearch,
+    timeSearch: state.result.timeSearch,
     nameIsFetching: state.status.nameSearch.isFetching,
-    sidIsFetching: state.status.sidSearch.isFetching,
+    timeIsFetching: state.status.timeSearch.isFetching,
   })
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     getNameSerch,
-    getSidSearch,
+    getTimeSearch,
   }, dispatch)
 }
 
