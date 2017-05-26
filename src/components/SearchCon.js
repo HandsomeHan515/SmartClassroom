@@ -78,7 +78,7 @@ class SearchCon extends Component {
     return (
       <div style={{ marginTop: 100 }}>
         <Search
-          placeholder='按姓名检索'
+          placeholder='按姓名检索 模糊查询'
           value={this.state.name}
           style={{ width: 666 }}
           className='search'
@@ -95,7 +95,7 @@ class SearchCon extends Component {
           }}
         />
         <Search
-          placeholder='按学号检索'
+          placeholder='按时间检索 格式：XXXX-X-X'
           style={{ width: 666, marginTop: 50 }}
           value={this.state.studentID}
           className='search'

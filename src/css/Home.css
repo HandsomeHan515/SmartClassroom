@@ -7,3 +7,12 @@
   width: 960px;
   height: 300px;
 }
+
+.text-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 50px;
+  color: #333;
+}

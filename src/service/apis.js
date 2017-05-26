@@ -88,5 +88,5 @@ export const getNameSearch = name => (
 
 //SIDSearch
 export const getSidSearch = studentID => (
-  get({ url: `${address.student}?studentID=${studentID}` })
+  get({ url: `${address.detail}?date=${studentID}` })
 )

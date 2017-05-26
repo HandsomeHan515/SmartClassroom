@@ -95,6 +95,7 @@ class CheckinStatistics extends Component {
       { title: '结束时间', dataIndex: 'end', id: 'end', render: end => transformTime(end, '年'), width: '20%' },
       { title: '在线时长', dataIndex: 'duration', id: 'duration', render: duration => timeDuration(duration), width: '20%' },
       { title: 'IP地址', dataIndex: 'ip', id: 'ip', width: '20%' },
+      { title: '日期', dataIndex: 'date', id: 'date' }
     ]
 
     return (
