@@ -5,7 +5,6 @@ import SearchCon from './SearchCon'
 import CheckinStatistics from './CheckinStatistics'
 import OnlineStatistics from './OnlineStatistics'
 import DrawingBoard from './DrawingBoard'
-import Chart from './Chart'
 
 export {
   Header,
@@ -15,5 +14,4 @@ export {
   CheckinStatistics,
   OnlineStatistics,
   DrawingBoard,
-  Chart,
 }
