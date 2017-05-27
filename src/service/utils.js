@@ -1,4 +1,4 @@
-export function request(config) {
+export const request = config => {
   config = Object.assign({}, {
     url: '',
     body: undefined,

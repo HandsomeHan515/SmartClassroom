@@ -12,5 +12,7 @@ export const address = {
   message: `${serviceDomain}/message/`,
 
   student: `${serviceDomain}/student/`,
+
+  user: `${serviceDomain}/user/`,
 }
 

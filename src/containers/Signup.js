@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { Form, Input, Carousel, Button } from 'antd'
+import { browserHistory } from 'react-router'
+import { Form, Input, Carousel, Button, message } from 'antd'
+
+import { request } from '../service/utils'
+import { address } from '../service/address'
 
 import '../css/Login.css'
 
@@ -14,11 +18,27 @@ class Register extends Component {
     }
   }
 
+  signup = body => {
+    return request({
+      url: address.user,
+      method: 'POST',
+      body: JSON.stringify(body)
+    })
+      .then(resp => {
+        if (resp.username) {
+          message.success('注册成功，请登录系统')
+          browserHistory.push({ pathname: '/signin' })
+        }
+      })
+  }
+
   handleSubmit = e => {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, val) => {
       if (!err) {
-        console.log('Received values of form: ', val)
+        const { username, password, email } = val
+        const body = { username, password, email }
+        this.signup(body)
       }
     })
   }
@@ -77,7 +97,7 @@ class Register extends Component {
             hasFeedback
           >
             {
-              getFieldDecorator('nickname', {
+              getFieldDecorator('username', {
                 rules: [{ required: true, message: '请输入您的用户名!' }],
               })(<Input placeholder="请输入用户名..." />)
             }

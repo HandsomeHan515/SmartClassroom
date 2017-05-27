@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
-import { Carousel } from 'antd'
+import { Carousel, Row } from 'antd'
+import { appCore } from '../service'
 
 import '../css/Home.css'
 import images from '../images'
@@ -19,6 +20,9 @@ class Home extends Component {
             <div><img className='img' src={images.banner3} alt="banner3" /></div>
           </Carousel>
         </div>
+        <Row type='flex' justify='center' className='homeText'>
+          欢迎{appCore.user.username}老师来到智慧教室管理系统！！！
+        </Row>
       </div>
     )
   }
