@@ -37,7 +37,7 @@ class OnlineStatistics extends Component {
   renderModal = props => {
     const { offline } = props
     const columns = [
-      { title: '姓名', dataIndex: 'name', id: 'name', width: '20%', render: name => name.username },
+      { title: '姓名', dataIndex: 'name', id: 'name', width: '20%' },
       { title: '学号', dataIndex: 'studentID', id: 'sid' },
       { title: '职务', dataIndex: 'duty', id: 'duty' },
       { title: '手机号码', dataIndex: 'phone', id: 'phone' },
@@ -62,27 +62,38 @@ class OnlineStatistics extends Component {
     )
   }
 
+  resetStatus = status => {
+    let newStatus = ''
+
+    if (status) {
+      newStatus = '在线'
+    } else {
+      newStatus = '离线'
+    }
+    return <span style={!status ? { color: 'red' } : null}>{newStatus}</span>
+  }
+
   render() {
     const { student } = this.props
     const columns = [
-      { title: '姓名', dataIndex: 'name', id: 'name', width: '20%', render: name => name.username },
+      { title: '姓名', dataIndex: 'name', id: 'name', width: '20%' },
       { title: '学号', dataIndex: 'studentID', id: 'sid' },
-      { title: '班级', dataIndex: 'classroom', id: 'classroom', render: classroom => classroom.name },
+      { title: '班级', dataIndex: 'classroom', id: 'classroom' },
       { title: '职务', dataIndex: 'duty', id: 'duty' },
-      { title: '状态', dataIndex: 'status', id: 'status' },
+      { title: '状态', dataIndex: 'status', id: 'status', render: status => this.resetStatus(status) },
     ]
 
     let online = 0, offline = 0
     for (let item of student) {
-      if (item.status === '在线') {
+      if (item.status === 1) {
         online++
       } else {
         offline++
       }
     }
 
-    const offlineStudents = student.filter(item => item.status === '离线')
-    const onlineStudents = student.filter(item => item.status === '在线')
+    const offlineStudents = student.filter(item => item.status === 0)
+    const onlineStudents = student.filter(item => item.status === 1)
 
     return (
       <div>
