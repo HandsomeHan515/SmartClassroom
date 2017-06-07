@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
-import { Row, Col, Icon, Menu, Affix } from 'antd'
+import { Link, browserHistory } from 'react-router'
+import { Row, Col, Icon, Menu, Affix, Button } from 'antd'
 
 import { navMenu } from '../data'
 
@@ -27,6 +27,15 @@ class Header extends Component {
                   })
                 }
               </Menu>
+              <Button
+                style={{ float: 'right', marginRight: -100, marginTop: -45 }}
+                onClick={() => {
+                  localStorage.clear()
+                  browserHistory.push({ pathname: '/signin' })
+                }}
+              >
+                注销
+              </Button>
             </Col>
           </Row>
         </Affix>

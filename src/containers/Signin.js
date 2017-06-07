@@ -44,7 +44,6 @@ class Login extends Component {
 
         appCore.username = username
         if (remember) {
-          console.log('name', username)
           if (window.localStorage) {
             localStorage.setItem('username', username)
           }
