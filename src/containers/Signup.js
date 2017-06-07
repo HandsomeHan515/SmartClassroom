@@ -26,7 +26,7 @@ class Register extends Component {
     })
       .then(resp => {
         if (resp.username) {
-          message.success('注册成功，请登录系统')
+          message.success('注册成功，请登录系统', 3)
           browserHistory.push({ pathname: '/signin' })
         }
       })

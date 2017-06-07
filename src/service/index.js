@@ -1,3 +1,3 @@
 export const appCore = {
-  user: {}
+  username: '',
 }

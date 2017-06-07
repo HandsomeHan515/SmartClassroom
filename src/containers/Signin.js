@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
-import { Form, Icon, Input, Button, Checkbox, Carousel } from 'antd'
+import { Link, browserHistory } from 'react-router'
+import { Form, Icon, Input, Button, Checkbox, Carousel, message } from 'antd'
+
+import { request } from '../service/utils'
+import { address } from '../service/address'
+import { appCore } from '../service'
 
 import '../css/Login.css'
 
@@ -11,30 +15,49 @@ class Login extends Component {
     super(props)
 
     this.state = {
-      remember: false,
-      name: 'han',
-      password: '123456'
+      username: '',
+      password: ''
     }
   }
 
-  componentDidMount() {
-    this.props.form.validateFields()
+  signin = body => {
+    return request({
+      url: address.login,
+      method: 'POST',
+      body: JSON.stringify(body)
+    })
+      .then(resp => {
+        console.log('resp: %o', resp)
+        if (resp.username) {
+          message.success('登录成功', 3)
+          browserHistory.push({ pathname: '/' })
+        }
+      })
   }
 
   handleSubmit = e => {
     e.preventDefault()
 
     this.props.form.validateFields((err, val) => {
-      console.log('err: %o, val: %o', err, val)
-      this.setState({
-        remember: val.remember
-      })
+      if (!err) {
+        const { username, remember } = val
+
+        appCore.username = username
+        if (remember) {
+          console.log('name', username)
+          if (window.localStorage) {
+            localStorage.setItem('username', username)
+          }
+        }
+
+        browserHistory.push({ pathname: '/' })
+      }
     })
   }
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const { name, password } = this.state
+    const { username, password } = this.state
 
     return (
       <div>
@@ -47,8 +70,8 @@ class Login extends Component {
           <Form onSubmit={this.handleSubmit}>
             <FormItem>
               {
-                getFieldDecorator('userName', {
-                  initialValue: name,
+                getFieldDecorator('username', {
+                  initialValue: username,
                   rules: [{ required: true, message: '请输入您的账号!' }],
                 })(<Input addonBefore={<Icon type="user" />} type="text" placeholder="账号" />)
               }
