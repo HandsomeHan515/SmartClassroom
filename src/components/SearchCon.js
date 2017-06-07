@@ -37,7 +37,7 @@ class SearchCon extends Component {
 
 
     const columns = [
-      { title: '姓名', dataIndex: 'name', id: 'name', width: '20%', render: name => name.username },
+      { title: '姓名', dataIndex: 'name', id: 'name', width: '20%' },
       { title: '开始时间', dataIndex: 'start', id: 'start', render: start => transformTime(start, '年') },
       { title: '结束时间', dataIndex: 'end', id: 'end', render: end => transformTime(end, '年') },
       { title: 'IP地址', dataIndex: 'ip', id: 'ip' },

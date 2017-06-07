@@ -88,7 +88,6 @@ class CheckinStatistics extends Component {
         filterDropdownVisible: this.state.filterDropdownVisible,
         onFilterDropdownVisibleChange: visible => this.setState({ filterDropdownVisible: visible }, () => this.searchInput.focus()
         ),
-        render: name => name.username,
         width: '10%'
       },
       { title: '开始时间', dataIndex: 'start', id: 'start', render: start => transformTime(start, '年'), width: '20%' },
