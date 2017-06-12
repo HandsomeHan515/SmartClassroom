@@ -40,7 +40,7 @@ class Login extends Component {
 
     this.props.form.validateFields((err, val) => {
       if (!err) {
-        const { username, remember } = val
+        const { username, remember, password } = val
 
         appCore.username = username
         if (remember) {
@@ -48,8 +48,11 @@ class Login extends Component {
             localStorage.setItem('username', username)
           }
         }
-
-        browserHistory.push({ pathname: '/' })
+        if (password === '123456') {
+          browserHistory.push({ pathname: '/' })
+        } else {
+          message.warning('密码错误请重新登录', 3)
+        }
       }
     })
   }
